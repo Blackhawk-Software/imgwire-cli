@@ -34,15 +34,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Verify Release Tag
-        shell: bash
-        run: |
-          package_version=$(node -p "require('./package.json').version")
-          expected_tag="v${package_version}"
-
-          if [ "${{ github.event.release.tag_name }}" != "$expected_tag" ]; then
-            echo "Release tag ${{ github.event.release.tag_name }} does not match package version $expected_tag"
-            exit 1
-          fi
+        run: yarn release:verify-tag "${{ github.event.release.tag_name }}"
 
       - name: Check Formatting
         run: yarn format:check
@@ -54,4 +46,4 @@ jobs:
         run: yarn test
 
       - name: Publish Package
-        run: npm publish --access public
+        run: npm publish --provenance --access public
