@@ -3,11 +3,13 @@ import type {AddressInfo} from 'node:net'
 
 import {runCommand} from '@oclif/test'
 import {expect} from 'chai'
-import {spawn} from 'node:child_process'
 import {mkdtemp, writeFile} from 'node:fs/promises'
 import {createServer, type IncomingMessage, type ServerResponse} from 'node:http'
 import os from 'node:os'
 import path from 'node:path'
+import {Readable} from 'node:stream'
+
+import {setStdinForTesting} from '../../src/lib/stdin.js'
 
 const API_KEY = 'sk_test_123456789'
 
@@ -21,12 +23,6 @@ type TestServer = {
   baseUrl: string
   close(): Promise<void>
   requests: CapturedRequest[]
-}
-
-type CliResult = {
-  code: null | number
-  stderr: string
-  stdout: string
 }
 
 async function createImgwireApiServer(): Promise<TestServer> {
@@ -72,33 +68,6 @@ async function withApiServer<T>(action: (server: TestServer) => Promise<T>): Pro
   } finally {
     await server.close()
   }
-}
-
-async function runCliWithStdin(args: string[], input: string, env: NodeJS.ProcessEnv): Promise<CliResult> {
-  const child = spawn(process.execPath, ['--loader', 'ts-node/esm', path.join(process.cwd(), 'bin/dev.js'), ...args], {
-    cwd: process.cwd(),
-    env: {...process.env, NODE_NO_WARNINGS: '1', ...env},
-    stdio: ['pipe', 'pipe', 'pipe'],
-  })
-  let stderr = ''
-  let stdout = ''
-
-  child.stderr.setEncoding('utf8')
-  child.stdout.setEncoding('utf8')
-  child.stderr.on('data', (chunk: string) => {
-    stderr += chunk
-  })
-  child.stdout.on('data', (chunk: string) => {
-    stdout += chunk
-  })
-  child.stdin.end(input)
-
-  const code = await new Promise<null | number>((resolve, reject) => {
-    child.on('error', reject)
-    child.on('close', resolve)
-  })
-
-  return {code, stderr, stdout}
 }
 
 async function handleRequest(
@@ -370,6 +339,7 @@ describe('SDK topic commands', () => {
   const originalBaseUrl = process.env.IMGWIRE_API_BASE_URL
 
   afterEach(() => {
+    setStdinForTesting(undefined)
     restoreEnv('IMGWIRE_API_KEY', originalApiKey)
     restoreEnv('IMGWIRE_API_BASE_URL', originalBaseUrl)
   })
@@ -539,16 +509,14 @@ describe('SDK topic commands', () => {
 
   it('image url reads an uploaded image ID from stdin', async () => {
     await withApiServer(async (server) => {
-      const generatedUrl = await runCliWithStdin(['image', 'url', '--width', '500', '--height', '500'], 'img_123\n', {
-        IMGWIRE_API_BASE_URL: server.baseUrl,
-        IMGWIRE_API_KEY: API_KEY,
-      })
+      setStdinForTesting(Readable.from(['img_123\n']))
 
-      expect(generatedUrl.code).to.equal(0)
-      expect(generatedUrl.stderr).to.equal('')
-      expect(generatedUrl.stdout.trim()).to.contain('https://cdn.imgwire.dev')
-      expect(generatedUrl.stdout.trim()).to.contain('width=500')
-      expect(generatedUrl.stdout.trim()).to.contain('height=500')
+      const {error, stdout} = await runCommand(['image', 'url', '--width', '500', '--height', '500'])
+
+      expect(error).to.equal(undefined)
+      expect(stdout.trim()).to.contain('https://cdn.imgwire.dev')
+      expect(stdout.trim()).to.contain('width=500')
+      expect(stdout.trim()).to.contain('height=500')
       expect(server.requests[0]?.method).to.equal('GET')
       expect(server.requests[0]?.url).to.equal('/api/v1/images/img_123')
     })

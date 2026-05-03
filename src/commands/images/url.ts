@@ -1,9 +1,8 @@
 import {Args, Command} from '@oclif/core'
-import {stdin} from 'node:process'
 
 import {runSdkCommand} from '../../lib/command.js'
 import {buildImageUrlOptions, imageUrlFlags} from '../../lib/image-url-options.js'
-import {readStdin} from '../../lib/stdin.js'
+import {hasReadableStdin, readStdin} from '../../lib/stdin.js'
 
 export default class ImagesUrl extends Command {
   static override args = {
@@ -21,7 +20,7 @@ export default class ImagesUrl extends Command {
 
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(ImagesUrl)
-    const imageId = args.id ?? (stdin.isTTY ? '' : (await readStdin()).trim())
+    const imageId = args.id ?? (hasReadableStdin() ? (await readStdin()).trim() : '')
 
     if (!imageId) {
       this.error('An image ID is required as an argument or through stdin.', {exit: 1})
