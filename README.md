@@ -4,9 +4,10 @@
 
 The imgwire CLI lets you upload images, generate transform-ready CDN URLs, manage image delivery resources, and inspect imgwire metrics from your terminal. Use it for local workflows, scripts, CI jobs, and any place where you want shell access to the same imgwire resources exposed by the SDKs.
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/imgwire-cli.svg)](https://npmjs.org/package/imgwire-cli)
-[![Downloads/week](https://img.shields.io/npm/dw/imgwire-cli.svg)](https://npmjs.org/package/imgwire-cli)
+[![npm version](https://img.shields.io/npm/v/%40imgwire%2Fcli)](https://www.npmjs.com/package/@imgwire/cli)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/Blackhawk-Software/imgwire-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/Blackhawk-Software/imgwire-cli/actions/workflows/ci.yml)
+[![Release](https://github.com/Blackhawk-Software/imgwire-cli/actions/workflows/release.yml/badge.svg)](https://github.com/Blackhawk-Software/imgwire-cli/actions/workflows/release.yml)
 
 > [!TIP]
 > To authenticate, sign in or create an account at [imgwire.dev](https://imgwire.dev), then create a Server API Key in the imgwire dashboard for the environment you want to manage. Copy that key and run `imgwire login`. Read the full API and SDK documentation [here](https://docs.imgwire.dev/guides/backend-quickstart).
