@@ -1,19 +1,30 @@
-# imgwire-cli
+![imgwire.dev Logo](https://cdn.imgwire.dev/6b024480-a5ac-426d-b539-2e4fccc4c6ac/26f80c13-48bd-4bb9-866e-5e9392b11a6a/4ba5fe50-433b-40db-a847-938d2081c21a?w=280&quality=80)
 
-The official imgwire.dev CLI
+# `imgwire-cli`
+
+The official imgwire.dev CLI.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/imgwire-cli.svg)](https://npmjs.org/package/imgwire-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/imgwire-cli.svg)](https://npmjs.org/package/imgwire-cli)
 
+> [!TIP]
+> Obtain an API key by signing up at [imgwire.dev](https://imgwire.dev). Read the full API & SDK documentation [here](https://docs.imgwire.dev/guides/backend-quickstart).
+
 <!-- toc -->
 
-- [imgwire-cli](#imgwire-cli)
+- [imgwire](#imgwire)
 - [Usage](#usage)
+- [Authentication](#authentication)
+- [Resources](#resources)
+- [Common Workflows](#common-workflows)
+- [Development](#development)
 - [Commands](#commands)
 <!-- tocstop -->
 
 # Usage
+
+Install the CLI globally once it is published:
 
 <!-- usage -->
 
@@ -30,6 +41,120 @@ USAGE
 ```
 
 <!-- usagestop -->
+
+You can inspect any command with `--help`:
+
+```sh-session
+$ imgwire images upload --help
+$ imgwire images url --help
+```
+
+Most resource commands print JSON so they can be inspected with tools like `jq`. Commands designed for shell composition print plain text:
+
+- `imgwire images upload PATH` prints the uploaded image ID.
+- `imgwire images url [ID]` prints a CDN URL.
+- `imgwire whoami` prints the current auth status.
+
+# Authentication
+
+Authenticate with a Server API Key:
+
+```sh-session
+$ imgwire login
+```
+
+The key is stored in the operating system credential store. You can also use `IMGWIRE_API_KEY` for non-interactive environments:
+
+```sh-session
+$ IMGWIRE_API_KEY=sk_live_... imgwire whoami
+```
+
+Useful auth commands:
+
+```sh-session
+$ imgwire whoami
+$ imgwire logout
+```
+
+# Resources
+
+The CLI is organized by imgwire resource:
+
+| Resource      | Topic                   | Common commands                                                                                                                                           |
+| ------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Images        | `imgwire images`        | `list`, `get-image`, `create-image`, `upload`, `url`, `delete`, `bulk-delete`, `create-upload-token`, `create-bulk-download-job`, `get-bulk-download-job` |
+| Custom Domain | `imgwire custom-domain` | `create`, `get-custom-domain`, `test-connection`, `delete`                                                                                                |
+| CORS Origins  | `imgwire cors-origin`   | `list`, `create`, `get-cors-origin`, `update`, `delete`                                                                                                   |
+| Metrics       | `imgwire metrics`       | `get-datasets`, `get-stats`                                                                                                                               |
+
+List commands default to `--limit 25 --page 1`:
+
+```sh-session
+$ imgwire images list
+$ imgwire cors-origin list --limit 50 --page 2
+```
+
+Metrics commands default to the current UTC day, hourly interval, and UTC timezone:
+
+```sh-session
+$ imgwire metrics get-stats
+$ imgwire metrics get-datasets --date-start 2026-05-01T00:00:00Z --date-end 2026-05-01T23:59:59Z --interval hourly --tz UTC
+```
+
+# Common Workflows
+
+Upload an image and print its image ID:
+
+```sh-session
+$ imgwire images upload ./hero.png
+img_123
+```
+
+Generate a CDN URL for an existing image:
+
+```sh-session
+$ imgwire images url img_123 --width 500 --height 500 --resizing-type cover
+https://cdn.imgwire.dev/...
+```
+
+Pipe upload into URL generation:
+
+```sh-session
+$ imgwire images upload ./hero.png | imgwire images url --width 500 --height 500 --resizing-type cover
+https://cdn.imgwire.dev/...
+```
+
+The singular `image` alias is also available for pipeline readability:
+
+```sh-session
+$ imgwire images upload ./hero.png | imgwire image url --width 500 --height 500
+```
+
+Use `create-image` when you only want an upload URL and plan to perform the object upload yourself:
+
+```sh-session
+$ imgwire images create-image --filename hero.png --mimetype image/png --contentlength 1024
+```
+
+Bulk operations accept comma-separated image IDs:
+
+```sh-session
+$ imgwire images bulk-delete --image-ids img_123,img_456
+$ imgwire images create-bulk-download-job --image-ids img_123,img_456
+```
+
+# Development
+
+Run the CLI from this repository with the oclif dev entrypoint:
+
+```sh-session
+$ yarn install
+$ yarn build
+$ ./bin/dev.js --help
+$ ./bin/dev.js images list
+```
+
+Use `yarn format`, `yarn build`, and `yarn test` before committing changes.
 
 # Commands
 
