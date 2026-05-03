@@ -75,7 +75,7 @@ async function withApiServer<T>(action: (server: TestServer) => Promise<T>): Pro
 }
 
 async function runCliWithStdin(args: string[], input: string, env: NodeJS.ProcessEnv): Promise<CliResult> {
-  const child = spawn(path.join(process.cwd(), 'bin/dev.js'), args, {
+  const child = spawn(process.execPath, ['--loader', 'ts-node/esm', path.join(process.cwd(), 'bin/dev.js'), ...args], {
     cwd: process.cwd(),
     env: {...process.env, NODE_NO_WARNINGS: '1', ...env},
     stdio: ['pipe', 'pipe', 'pipe'],

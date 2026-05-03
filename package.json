@@ -3,6 +3,7 @@
   "description": "Upload, manage, transform, and inspect imgwire.dev images and resources from your terminal.",
   "version": "0.0.0",
   "author": "Blackhawk Software",
+  "packageManager": "yarn@1.22.22",
   "bin": {
     "imgwire": "./bin/run.js"
   },
