@@ -55,6 +55,8 @@ policy changes; both are ignored.
 - Build with `yarn build`.
 - Run tests with `yarn test`; `posttest` runs `yarn lint`.
 - Run lint directly with `yarn lint`.
+- Format files with `yarn format`.
+- Check formatting with `yarn format:check`.
 - Try commands from source with `./bin/dev.js <command>`.
 
 The GitHub test workflow runs `yarn`, `yarn build`, and `yarn test` across
