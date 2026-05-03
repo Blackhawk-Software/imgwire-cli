@@ -54,7 +54,22 @@
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help"
-    ]
+    ],
+    "topicSeparator": " ",
+    "topics": {
+      "cors-origin": {
+        "description": "Manage CORS origins"
+      },
+      "custom-domain": {
+        "description": "Manage the custom domain"
+      },
+      "images": {
+        "description": "Manage images"
+      },
+      "metrics": {
+        "description": "Inspect metrics"
+      }
+    }
   },
   "repository": "Blackhawk-Software/imgwire-cli",
   "scripts": {
