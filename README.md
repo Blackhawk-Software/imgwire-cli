@@ -1,20 +1,21 @@
-imgwire-cli
-=================
+# imgwire-cli
 
 The official imgwire.dev CLI
-
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/imgwire-cli.svg)](https://npmjs.org/package/imgwire-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/imgwire-cli.svg)](https://npmjs.org/package/imgwire-cli)
 
-
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g imgwire-cli
 $ imgwire COMMAND
@@ -26,22 +27,26 @@ USAGE
   $ imgwire COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
-* [`imgwire hello PERSON`](#imgwire-hello-person)
-* [`imgwire hello world`](#imgwire-hello-world)
-* [`imgwire help [COMMAND]`](#imgwire-help-command)
-* [`imgwire plugins`](#imgwire-plugins)
-* [`imgwire plugins add PLUGIN`](#imgwire-plugins-add-plugin)
-* [`imgwire plugins:inspect PLUGIN...`](#imgwire-pluginsinspect-plugin)
-* [`imgwire plugins install PLUGIN`](#imgwire-plugins-install-plugin)
-* [`imgwire plugins link PATH`](#imgwire-plugins-link-path)
-* [`imgwire plugins remove [PLUGIN]`](#imgwire-plugins-remove-plugin)
-* [`imgwire plugins reset`](#imgwire-plugins-reset)
-* [`imgwire plugins uninstall [PLUGIN]`](#imgwire-plugins-uninstall-plugin)
-* [`imgwire plugins unlink [PLUGIN]`](#imgwire-plugins-unlink-plugin)
-* [`imgwire plugins update`](#imgwire-plugins-update)
+
+- [`imgwire hello PERSON`](#imgwire-hello-person)
+- [`imgwire hello world`](#imgwire-hello-world)
+- [`imgwire help [COMMAND]`](#imgwire-help-command)
+- [`imgwire plugins`](#imgwire-plugins)
+- [`imgwire plugins add PLUGIN`](#imgwire-plugins-add-plugin)
+- [`imgwire plugins:inspect PLUGIN...`](#imgwire-pluginsinspect-plugin)
+- [`imgwire plugins install PLUGIN`](#imgwire-plugins-install-plugin)
+- [`imgwire plugins link PATH`](#imgwire-plugins-link-path)
+- [`imgwire plugins remove [PLUGIN]`](#imgwire-plugins-remove-plugin)
+- [`imgwire plugins reset`](#imgwire-plugins-reset)
+- [`imgwire plugins uninstall [PLUGIN]`](#imgwire-plugins-uninstall-plugin)
+- [`imgwire plugins unlink [PLUGIN]`](#imgwire-plugins-unlink-plugin)
+- [`imgwire plugins update`](#imgwire-plugins-update)
 
 ## `imgwire hello PERSON`
 
@@ -394,4 +399,5 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.63/src/commands/plugins/update.ts)_
+
 <!-- commandsstop -->

@@ -25,6 +25,7 @@
     "eslint-config-prettier": "^10",
     "mocha": "^11",
     "oclif": "^4",
+    "prettier": "^3.8.3",
     "shx": "^0.3.3",
     "ts-node": "^10",
     "typescript": "^5"
@@ -62,6 +63,8 @@
   "repository": "Blackhawk-Software/imgwire-cli",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
+    "format": "prettier --write \"**/*.{js,mjs,ts,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{js,mjs,ts,json,md,yml,yaml}\"",
     "lint": "eslint",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "yarn lint",
