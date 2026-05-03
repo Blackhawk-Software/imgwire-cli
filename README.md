@@ -8,6 +8,7 @@ The official imgwire.dev CLI
 
 <!-- toc -->
 
+- [imgwire-cli](#imgwire-cli)
 - [Usage](#usage)
 - [Commands](#commands)
 <!-- tocstop -->
@@ -37,6 +38,8 @@ USAGE
 - [`imgwire hello PERSON`](#imgwire-hello-person)
 - [`imgwire hello world`](#imgwire-hello-world)
 - [`imgwire help [COMMAND]`](#imgwire-help-command)
+- [`imgwire login`](#imgwire-login)
+- [`imgwire logout`](#imgwire-logout)
 - [`imgwire plugins`](#imgwire-plugins)
 - [`imgwire plugins add PLUGIN`](#imgwire-plugins-add-plugin)
 - [`imgwire plugins:inspect PLUGIN...`](#imgwire-pluginsinspect-plugin)
@@ -47,6 +50,7 @@ USAGE
 - [`imgwire plugins uninstall [PLUGIN]`](#imgwire-plugins-uninstall-plugin)
 - [`imgwire plugins unlink [PLUGIN]`](#imgwire-plugins-unlink-plugin)
 - [`imgwire plugins update`](#imgwire-plugins-update)
+- [`imgwire whoami`](#imgwire-whoami)
 
 ## `imgwire hello PERSON`
 
@@ -109,6 +113,45 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/6.2.46/src/commands/help.ts)_
+
+## `imgwire login`
+
+Authenticate with an imgwire Server API Key
+
+```
+USAGE
+  $ imgwire login [--api-key-stdin]
+
+FLAGS
+  --api-key-stdin  Read the Server API Key from stdin instead of prompting
+
+DESCRIPTION
+  Authenticate with an imgwire Server API Key
+
+EXAMPLES
+  $ imgwire login
+
+  printf '%s' "$IMGWIRE_API_KEY" | imgwire login --api-key-stdin
+```
+
+_See code: [src/commands/login.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/login.ts)_
+
+## `imgwire logout`
+
+Remove the stored imgwire Server API Key
+
+```
+USAGE
+  $ imgwire logout
+
+DESCRIPTION
+  Remove the stored imgwire Server API Key
+
+EXAMPLES
+  $ imgwire logout
+```
+
+_See code: [src/commands/logout.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/logout.ts)_
 
 ## `imgwire plugins`
 
@@ -399,5 +442,22 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.63/src/commands/plugins/update.ts)_
+
+## `imgwire whoami`
+
+Show the current imgwire authentication status
+
+```
+USAGE
+  $ imgwire whoami
+
+DESCRIPTION
+  Show the current imgwire authentication status
+
+EXAMPLES
+  $ imgwire whoami
+```
+
+_See code: [src/commands/whoami.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/whoami.ts)_
 
 <!-- commandsstop -->

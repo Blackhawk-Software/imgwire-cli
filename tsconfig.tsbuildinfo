@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/commands/hello/index.ts","./src/commands/hello/world.ts"],"version":"5.9.3"}
+{"root":["./src/index.ts","./src/commands/login.ts","./src/commands/logout.ts","./src/commands/whoami.ts","./src/commands/hello/index.ts","./src/commands/hello/world.ts","./src/lib/auth.ts","./src/lib/credentials.ts","./src/lib/stdin.ts"],"version":"5.9.3"}
