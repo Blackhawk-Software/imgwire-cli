@@ -2,18 +2,18 @@
 
 # `imgwire-cli`
 
-The official imgwire.dev CLI.
+The imgwire CLI lets you upload images, generate transform-ready CDN URLs, manage image delivery resources, and inspect imgwire metrics from your terminal. Use it for local workflows, scripts, CI jobs, and any place where you want shell access to the same imgwire resources exposed by the SDKs.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/imgwire-cli.svg)](https://npmjs.org/package/imgwire-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/imgwire-cli.svg)](https://npmjs.org/package/imgwire-cli)
 
 > [!TIP]
-> Obtain an API key by signing up at [imgwire.dev](https://imgwire.dev). Read the full API & SDK documentation [here](https://docs.imgwire.dev/guides/backend-quickstart).
+> To authenticate, sign in or create an account at [imgwire.dev](https://imgwire.dev), then create a Server API Key in the imgwire dashboard for the environment you want to manage. Copy that key and run `imgwire login`. Read the full API and SDK documentation [here](https://docs.imgwire.dev/guides/backend-quickstart).
 
 <!-- toc -->
 
-- [imgwire](#imgwire)
+- [`imgwire-cli`](#imgwire-cli)
 - [Usage](#usage)
 - [Authentication](#authentication)
 - [Resources](#resources)
@@ -57,13 +57,17 @@ Most resource commands print JSON so they can be inspected with tools like `jq`.
 
 # Authentication
 
+Most commands require a Server API Key. Create one from the imgwire dashboard after signing in at [imgwire.dev](https://imgwire.dev). Treat this key like a password: it can perform server-side API operations for your environment.
+
 Authenticate with a Server API Key:
 
 ```sh-session
 $ imgwire login
 ```
 
-The key is stored in the operating system credential store. You can also use `IMGWIRE_API_KEY` for non-interactive environments:
+Paste the key when prompted. The CLI stores it in the operating system credential store.
+
+For non-interactive environments, set `IMGWIRE_API_KEY` instead:
 
 ```sh-session
 $ IMGWIRE_API_KEY=sk_live_... imgwire whoami
