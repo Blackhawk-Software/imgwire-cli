@@ -11,6 +11,8 @@ export default class CustomDomainGetCustomDomain extends Command {
   static override flags = {}
 
   public async run(): Promise<void> {
+    await this.parse(CustomDomainGetCustomDomain)
+
     const result = await runSdkCommand(this, (client) => client.customDomain.retrieve())
 
     writeJson(this, result)

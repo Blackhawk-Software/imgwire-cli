@@ -11,6 +11,8 @@ export default class CustomDomainDelete extends Command {
   static override flags = {}
 
   public async run(): Promise<void> {
+    await this.parse(CustomDomainDelete)
+
     const result = await runSdkCommand(this, (client) => client.customDomain.delete())
 
     writeJson(this, result)

@@ -11,6 +11,8 @@ export default class CustomDomainTestConnection extends Command {
   static override flags = {}
 
   public async run(): Promise<void> {
+    await this.parse(CustomDomainTestConnection)
+
     const result = await runSdkCommand(this, (client) => client.customDomain.testConnection())
 
     writeJson(this, result)

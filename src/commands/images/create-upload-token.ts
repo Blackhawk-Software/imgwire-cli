@@ -12,6 +12,8 @@ export default class ImagesCreateUploadToken extends Command {
   static override hiddenAliases = ['image create-upload-token']
 
   public async run(): Promise<void> {
+    await this.parse(ImagesCreateUploadToken)
+
     const result = await runSdkCommand(this, (client) => client.images.createUploadToken())
 
     writeJson(this, result)
