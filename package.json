@@ -1,5 +1,5 @@
 {
-  "name": "imgwire-cli",
+  "name": "@imgwire/cli",
   "description": "Upload, manage, transform, and inspect imgwire.dev images and resources from your terminal.",
   "version": "0.0.0",
   "author": "Blackhawk Software",
@@ -48,6 +48,9 @@
   ],
   "license": "MIT",
   "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "oclif": {
     "bin": "imgwire",

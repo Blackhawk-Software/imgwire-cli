@@ -1,6 +1,6 @@
 ![imgwire.dev Logo](https://cdn.imgwire.dev/6b024480-a5ac-426d-b539-2e4fccc4c6ac/26f80c13-48bd-4bb9-866e-5e9392b11a6a/4ba5fe50-433b-40db-a847-938d2081c21a?w=280&quality=80)
 
-# `imgwire-cli`
+# `@imgwire/cli`
 
 The imgwire CLI lets you upload images, generate transform-ready CDN URLs, manage image delivery resources, and inspect imgwire metrics from your terminal. Use it for local workflows, scripts, CI jobs, and any place where you want shell access to the same imgwire resources exposed by the SDKs.
 
@@ -14,7 +14,7 @@ The imgwire CLI lets you upload images, generate transform-ready CDN URLs, manag
 
 <!-- toc -->
 
-- [`imgwire-cli`](#imgwire-cli)
+- [`@imgwire/cli`](#imgwirecli)
 - [Usage](#usage)
 - [Authentication](#authentication)
 - [Resources](#resources)
@@ -30,11 +30,11 @@ Install the CLI globally once it is published:
 <!-- usage -->
 
 ```sh-session
-$ npm install -g imgwire-cli
+$ npm install -g @imgwire/cli
 $ imgwire COMMAND
 running command...
 $ imgwire (--version)
-imgwire-cli/0.0.0 darwin-arm64 node-v25.6.0
+@imgwire/cli/0.0.0 darwin-arm64 node-v25.6.0
 $ imgwire --help [COMMAND]
 USAGE
   $ imgwire COMMAND
