@@ -1,13 +1,17 @@
 import {stdin} from 'node:process'
 import {Readable} from 'node:stream'
 
-let stdinOverride: Readable | undefined
+const STDIN_OVERRIDE_KEY = '__imgwireCliStdinOverride__'
 
-export function hasReadableStdin(): boolean {
-  return stdinOverride !== undefined || !stdin.isTTY
+type StdinGlobal = typeof globalThis & {
+  [STDIN_OVERRIDE_KEY]?: Readable
 }
 
-export async function readStdin(input: Readable = stdinOverride ?? stdin): Promise<string> {
+export function hasReadableStdin(): boolean {
+  return getStdinOverride() !== undefined || !stdin.isTTY
+}
+
+export async function readStdin(input: Readable = getStdinOverride() ?? stdin): Promise<string> {
   input.setEncoding('utf8')
 
   let value = ''
@@ -19,5 +23,16 @@ export async function readStdin(input: Readable = stdinOverride ?? stdin): Promi
 }
 
 export function setStdinForTesting(input: Readable | undefined): void {
-  stdinOverride = input
+  const stdinGlobal = globalThis as StdinGlobal
+
+  if (input === undefined) {
+    delete stdinGlobal[STDIN_OVERRIDE_KEY]
+    return
+  }
+
+  stdinGlobal[STDIN_OVERRIDE_KEY] = input
+}
+
+function getStdinOverride(): Readable | undefined {
+  return (globalThis as StdinGlobal)[STDIN_OVERRIDE_KEY]
 }

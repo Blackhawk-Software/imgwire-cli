@@ -1,5 +1,6 @@
 const CREDENTIAL_ACCOUNT = 'server-api-key'
 const CREDENTIAL_SERVICE = 'imgwire'
+const MEMORY_CREDENTIALS_KEY = '__imgwireCliMemoryCredentials__'
 const TEST_CREDENTIAL_STORE_ENV = 'IMGWIRE_TEST_CREDENTIAL_STORE'
 
 export type CredentialStore = {
@@ -8,7 +9,9 @@ export type CredentialStore = {
   setApiKey(apiKey: string): Promise<void>
 }
 
-const memoryCredentials = new Map<string, string>()
+type CredentialStoreGlobal = typeof globalThis & {
+  [MEMORY_CREDENTIALS_KEY]?: Map<string, string>
+}
 
 class KeyringCredentialStore implements CredentialStore {
   async deleteApiKey(): Promise<boolean> {
@@ -51,20 +54,20 @@ class KeyringCredentialStore implements CredentialStore {
 
 class MemoryCredentialStore implements CredentialStore {
   async deleteApiKey(): Promise<boolean> {
-    return memoryCredentials.delete(CREDENTIAL_ACCOUNT)
+    return getMemoryCredentials().delete(CREDENTIAL_ACCOUNT)
   }
 
   async getApiKey(): Promise<null | string> {
-    return memoryCredentials.get(CREDENTIAL_ACCOUNT) ?? null
+    return getMemoryCredentials().get(CREDENTIAL_ACCOUNT) ?? null
   }
 
   async setApiKey(apiKey: string): Promise<void> {
-    memoryCredentials.set(CREDENTIAL_ACCOUNT, apiKey)
+    getMemoryCredentials().set(CREDENTIAL_ACCOUNT, apiKey)
   }
 }
 
 export function clearMemoryCredentialStore(): void {
-  memoryCredentials.clear()
+  getMemoryCredentials().clear()
 }
 
 export function createCredentialStore(): CredentialStore {
@@ -85,6 +88,14 @@ export async function getStoredApiKey(store = createCredentialStore()): Promise<
 
 export async function storeApiKey(apiKey: string, store = createCredentialStore()): Promise<void> {
   await store.setApiKey(apiKey)
+}
+
+function getMemoryCredentials(): Map<string, string> {
+  const storeGlobal = globalThis as CredentialStoreGlobal
+
+  storeGlobal[MEMORY_CREDENTIALS_KEY] ??= new Map<string, string>()
+
+  return storeGlobal[MEMORY_CREDENTIALS_KEY]
 }
 
 function isNoEntryError(error: unknown): boolean {

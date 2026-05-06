@@ -115,6 +115,11 @@ async function handleRequest(
     return
   }
 
+  if (request.method === 'POST' && url.pathname === '/api/v1/images/upload_via_url') {
+    writeJson(response, 200, image())
+    return
+  }
+
   if (request.method === 'POST' && url.pathname === '/api/v1/images/token') {
     writeJson(response, 200, uploadToken())
     return
@@ -414,6 +419,43 @@ describe('SDK topic commands', () => {
       expect(body).to.deep.equal({content_length: 4, file_name: 'hero.png', mime_type: 'image/png'})
       expect(server.requests[1]?.method).to.equal('PUT')
       expect(server.requests[1]?.url).to.equal('/upload')
+    })
+  })
+
+  it('images upload-via-url uploads a remote URL and prints the image ID', async () => {
+    await withApiServer(async (server) => {
+      const {error, stdout} = await runCommand([
+        'images',
+        'upload-via-url',
+        'https://assets.example.com/hero.jpg',
+        '--filename',
+        'hero.jpg',
+        '--mimetype',
+        'image/jpeg',
+        '--purpose',
+        'import',
+        '--idempotency-key',
+        'import-hero',
+      ])
+      const body = requestBody<{
+        file_name: string
+        idempotency_key: string
+        mime_type: string
+        purpose: string
+        url: string
+      }>(server.requests[0]!)
+
+      expect(error).to.equal(undefined)
+      expect(stdout.trim()).to.equal('img_123')
+      expect(server.requests[0]?.method).to.equal('POST')
+      expect(server.requests[0]?.url).to.equal('/api/v1/images/upload_via_url')
+      expect(body).to.deep.equal({
+        file_name: 'hero.jpg',
+        idempotency_key: 'import-hero',
+        mime_type: 'image/jpeg',
+        purpose: 'import',
+        url: 'https://assets.example.com/hero.jpg',
+      })
     })
   })
 

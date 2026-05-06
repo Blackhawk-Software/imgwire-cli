@@ -34,7 +34,7 @@ $ npm install -g @imgwire/cli
 $ imgwire COMMAND
 running command...
 $ imgwire (--version)
-@imgwire/cli/0.0.0 darwin-arm64 node-v25.6.0
+@imgwire/cli/0.1.0 darwin-arm64 node-v25.6.0
 $ imgwire --help [COMMAND]
 USAGE
   $ imgwire COMMAND
@@ -184,6 +184,7 @@ Use `yarn format`, `yarn build`, and `yarn test` before committing changes.
 - [`imgwire images get-image IMAGE-ID`](#imgwire-images-get-image-image-id)
 - [`imgwire images list`](#imgwire-images-list)
 - [`imgwire images upload PATH`](#imgwire-images-upload-path)
+- [`imgwire images upload-via-url URL`](#imgwire-images-upload-via-url-url)
 - [`imgwire images url [ID]`](#imgwire-images-url-id)
 - [`imgwire login`](#imgwire-login)
 - [`imgwire logout`](#imgwire-logout)
@@ -209,7 +210,7 @@ EXAMPLES
   $ imgwire cors-origin create https://example.com
 ```
 
-_See code: [src/commands/cors-origin/create.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/cors-origin/create.ts)_
+_See code: [src/commands/cors-origin/create.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/cors-origin/create.ts)_
 
 ## `imgwire cors-origin delete ID`
 
@@ -229,7 +230,7 @@ EXAMPLES
   $ imgwire cors-origin delete cor_123
 ```
 
-_See code: [src/commands/cors-origin/delete.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/cors-origin/delete.ts)_
+_See code: [src/commands/cors-origin/delete.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/cors-origin/delete.ts)_
 
 ## `imgwire cors-origin get-cors-origin ID`
 
@@ -249,7 +250,7 @@ EXAMPLES
   $ imgwire cors-origin get-cors-origin cor_123
 ```
 
-_See code: [src/commands/cors-origin/get-cors-origin.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/cors-origin/get-cors-origin.ts)_
+_See code: [src/commands/cors-origin/get-cors-origin.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/cors-origin/get-cors-origin.ts)_
 
 ## `imgwire cors-origin list`
 
@@ -270,7 +271,7 @@ EXAMPLES
   $ imgwire cors-origin list --limit 25 --page 1
 ```
 
-_See code: [src/commands/cors-origin/list.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/cors-origin/list.ts)_
+_See code: [src/commands/cors-origin/list.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/cors-origin/list.ts)_
 
 ## `imgwire cors-origin update ID PATTERN`
 
@@ -291,7 +292,7 @@ EXAMPLES
   $ imgwire cors-origin update cor_123 https://example.com
 ```
 
-_See code: [src/commands/cors-origin/update.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/cors-origin/update.ts)_
+_See code: [src/commands/cors-origin/update.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/cors-origin/update.ts)_
 
 ## `imgwire custom-domain create HOSTNAME`
 
@@ -311,7 +312,7 @@ EXAMPLES
   $ imgwire custom-domain create images.example.com
 ```
 
-_See code: [src/commands/custom-domain/create.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/custom-domain/create.ts)_
+_See code: [src/commands/custom-domain/create.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/custom-domain/create.ts)_
 
 ## `imgwire custom-domain delete`
 
@@ -328,7 +329,7 @@ EXAMPLES
   $ imgwire custom-domain delete
 ```
 
-_See code: [src/commands/custom-domain/delete.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/custom-domain/delete.ts)_
+_See code: [src/commands/custom-domain/delete.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/custom-domain/delete.ts)_
 
 ## `imgwire custom-domain get-custom-domain`
 
@@ -345,7 +346,7 @@ EXAMPLES
   $ imgwire custom-domain get-custom-domain
 ```
 
-_See code: [src/commands/custom-domain/get-custom-domain.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/custom-domain/get-custom-domain.ts)_
+_See code: [src/commands/custom-domain/get-custom-domain.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/custom-domain/get-custom-domain.ts)_
 
 ## `imgwire custom-domain test-connection`
 
@@ -362,7 +363,7 @@ EXAMPLES
   $ imgwire custom-domain test-connection
 ```
 
-_See code: [src/commands/custom-domain/test-connection.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/custom-domain/test-connection.ts)_
+_See code: [src/commands/custom-domain/test-connection.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/custom-domain/test-connection.ts)_
 
 ## `imgwire help [COMMAND]`
 
@@ -402,7 +403,7 @@ EXAMPLES
   $ imgwire images bulk-delete --image-ids img_123,img_456
 ```
 
-_See code: [src/commands/images/bulk-delete.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/bulk-delete.ts)_
+_See code: [src/commands/images/bulk-delete.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/bulk-delete.ts)_
 
 ## `imgwire images create-bulk-download-job`
 
@@ -422,7 +423,7 @@ EXAMPLES
   $ imgwire images create-bulk-download-job --image-ids img_123,img_456
 ```
 
-_See code: [src/commands/images/create-bulk-download-job.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/create-bulk-download-job.ts)_
+_See code: [src/commands/images/create-bulk-download-job.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/create-bulk-download-job.ts)_
 
 ## `imgwire images create-image`
 
@@ -446,7 +447,7 @@ EXAMPLES
   $ imgwire images create-image --filename hero.png --mimetype image/png --contentlength 1024
 ```
 
-_See code: [src/commands/images/create-image.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/create-image.ts)_
+_See code: [src/commands/images/create-image.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/create-image.ts)_
 
 ## `imgwire images create-upload-token`
 
@@ -463,7 +464,7 @@ EXAMPLES
   $ imgwire images create-upload-token
 ```
 
-_See code: [src/commands/images/create-upload-token.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/create-upload-token.ts)_
+_See code: [src/commands/images/create-upload-token.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/create-upload-token.ts)_
 
 ## `imgwire images delete ID`
 
@@ -483,7 +484,7 @@ EXAMPLES
   $ imgwire images delete img_123
 ```
 
-_See code: [src/commands/images/delete.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/delete.ts)_
+_See code: [src/commands/images/delete.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/delete.ts)_
 
 ## `imgwire images get-bulk-download-job ID`
 
@@ -503,7 +504,7 @@ EXAMPLES
   $ imgwire images get-bulk-download-job job_123
 ```
 
-_See code: [src/commands/images/get-bulk-download-job.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/get-bulk-download-job.ts)_
+_See code: [src/commands/images/get-bulk-download-job.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/get-bulk-download-job.ts)_
 
 ## `imgwire images get-image IMAGE-ID`
 
@@ -523,7 +524,7 @@ EXAMPLES
   $ imgwire images get-image img_123
 ```
 
-_See code: [src/commands/images/get-image.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/get-image.ts)_
+_See code: [src/commands/images/get-image.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/get-image.ts)_
 
 ## `imgwire images list`
 
@@ -544,7 +545,7 @@ EXAMPLES
   $ imgwire images list --limit 25 --page 1
 ```
 
-_See code: [src/commands/images/list.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/list.ts)_
+_See code: [src/commands/images/list.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/list.ts)_
 
 ## `imgwire images upload PATH`
 
@@ -566,7 +567,36 @@ EXAMPLES
   $ imgwire images upload ./hero.png | imgwire images url --width 500 --height 500
 ```
 
-_See code: [src/commands/images/upload.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/upload.ts)_
+_See code: [src/commands/images/upload.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/upload.ts)_
+
+## `imgwire images upload-via-url URL`
+
+Upload an image from a remote URL and print the image ID
+
+```
+USAGE
+  $ imgwire images upload-via-url URL [--filename <value>] [--idempotency-key <value>] [--mimetype <value>] [--purpose
+    <value>]
+
+ARGUMENTS
+  URL  Remote image URL to upload
+
+FLAGS
+  --filename=<value>         Original file name
+  --idempotency-key=<value>  Idempotency key for the upload request
+  --mimetype=<value>         Image MIME type
+  --purpose=<value>          Optional upload purpose
+
+DESCRIPTION
+  Upload an image from a remote URL and print the image ID
+
+EXAMPLES
+  $ imgwire images upload-via-url https://assets.example.com/hero.jpg
+
+  $ imgwire images upload-via-url https://assets.example.com/hero.jpg --filename hero.jpg --mimetype image/jpeg
+```
+
+_See code: [src/commands/images/upload-via-url.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/upload-via-url.ts)_
 
 ## `imgwire images url [ID]`
 
@@ -708,7 +738,7 @@ EXAMPLES
   $ imgwire images upload ./hero.png | imgwire images url --width 500
 ```
 
-_See code: [src/commands/images/url.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/images/url.ts)_
+_See code: [src/commands/images/url.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/images/url.ts)_
 
 ## `imgwire login`
 
@@ -730,7 +760,7 @@ EXAMPLES
   printf '%s' "$IMGWIRE_API_KEY" | imgwire login --api-key-stdin
 ```
 
-_See code: [src/commands/login.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/login.ts)_
+_See code: [src/commands/login.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/login.ts)_
 
 ## `imgwire logout`
 
@@ -747,7 +777,7 @@ EXAMPLES
   $ imgwire logout
 ```
 
-_See code: [src/commands/logout.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/logout.ts)_
+_See code: [src/commands/logout.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/logout.ts)_
 
 ## `imgwire metrics get-datasets`
 
@@ -772,7 +802,7 @@ EXAMPLES
   $ imgwire metrics get-datasets --interval hourly --tz UTC
 ```
 
-_See code: [src/commands/metrics/get-datasets.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/metrics/get-datasets.ts)_
+_See code: [src/commands/metrics/get-datasets.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/metrics/get-datasets.ts)_
 
 ## `imgwire metrics get-stats`
 
@@ -797,7 +827,7 @@ EXAMPLES
   $ imgwire metrics get-stats --interval hourly --tz UTC
 ```
 
-_See code: [src/commands/metrics/get-stats.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/metrics/get-stats.ts)_
+_See code: [src/commands/metrics/get-stats.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/metrics/get-stats.ts)_
 
 ## `imgwire whoami`
 
@@ -814,6 +844,6 @@ EXAMPLES
   $ imgwire whoami
 ```
 
-_See code: [src/commands/whoami.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.0.0/src/commands/whoami.ts)_
+_See code: [src/commands/whoami.ts](https://github.com/Blackhawk-Software/imgwire-cli/blob/v0.1.0/src/commands/whoami.ts)_
 
 <!-- commandsstop -->
